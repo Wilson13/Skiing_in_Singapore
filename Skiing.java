@@ -21,12 +21,12 @@ public class Skiing {
                     // Loop through every single element and seek the path
                     currentPath = recursiveSeek(map, i, j, path);
 
-										// If returned path from this element is longer than
+                                        // If returned path from this element is longer than
                     // the current stored path, save it as the lonest path.
                     if (currentPath.length() > longestPath.length())
                         longestPath = currentPath;
 
-										// If the returned path from this element is the same length as
+                                        // If the returned path from this element is the same length as
                     // the current stored path, save the one with the more vertical drop.
                     else if (currentPath.length() == longestPath.length()) {
                         int currentPathDrop = Character.getNumericValue(currentPath.charAt(0)) - Character.getNumericValue(currentPath.charAt(currentPath.length()-1));
@@ -55,7 +55,7 @@ public class Skiing {
             String sCurrentLine;
             int[][] elevationArray = new int[10][10];
 
-						while ((sCurrentLine = br.readLine()) != null) {
+                        while ((sCurrentLine = br.readLine()) != null) {
                 // Get map size
                 if (numLine == 0) {
                     String[] size = sCurrentLine.split(" ");
@@ -116,10 +116,10 @@ public class Skiing {
         String[] fourPaths = {"", "", "", ""};
         // West
         if (i-1 > 0 && map[i-1][j] < map[i][j]) {
-                fourPaths[0] = recursiveSeek(map, i-1, j, path);
+            fourPaths[0] = recursiveSeek(map, i-1, j, path);
         }
         // North
-      	if (j-1 > 0 && map[i][j-1] < map[i][j]) {
+          if (j-1 > 0 && map[i][j-1] < map[i][j]) {
             fourPaths[1] = recursiveSeek(map, i, j-1, path);
         }
         // East
@@ -127,19 +127,19 @@ public class Skiing {
             fourPaths[2] = recursiveSeek(map, i, j+1, path);
         }
         // South
-				if (i+1 < map.length && map[i+1][j] < map[i][j]) {
-            fourPaths[3] = recursiveSeek(map, i+1, j, path);
+                if (i+1 < map.length && map[i+1][j] < map[i][j]) {
+          fourPaths[3] = recursiveSeek(map, i+1, j, path);
         }
         String returnPath = path;
         // Compare and return the longest and largest vertical drop path.
         for (int k = 0; k < fourPaths.length; k++) {
 
-						// If returned path from this element is longer than
+                        // If returned path from this element is longer than
             // the current stored path, save it as the lonest path.
             if (fourPaths[k].length() > returnPath.length())
                 returnPath = fourPaths[k];
 
-						// If the returned path from this element is the same length as
+                        // If the returned path from this element is the same length as
             // the current stored path, save the one with the more vertical drop.
             else if (fourPaths[k].length() == returnPath.length() && returnPath.length() > 1) {
                 int fourPathsDrop = Character.getNumericValue(fourPaths[k].charAt(0)) - Character.getNumericValue(fourPaths[k].charAt(fourPaths[k].length()-1));
