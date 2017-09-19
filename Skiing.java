@@ -33,15 +33,12 @@ public class Skiing {
 							longestPath = currentPath;
 						}
 					}
-					//System.out.println("Current longest and largest vertical drop path: " + longestPath);
 				}
 			}
 			System.out.println("Longest and largest vertical drop path: " + longestPath);
 		} else {
 			System.out.println("Input out of range!");
 		}
-		//Scanner reader = new Scanner(System.in);  // Reading from System.in
-		//int input = reader.nextInt();
 	}
 
 	private static int[][] getMap2dArray(String fileName) {
@@ -50,7 +47,6 @@ public class Skiing {
 		FileReader fr = null;
 		int numLine = 0; // current number of line
 		try {
-			//br = new BufferedReader(new FileReader(FILENAME));
 			fr = new FileReader(FILENAME);
 			br = new BufferedReader(fr);
 
@@ -70,8 +66,6 @@ public class Skiing {
 					else {
 						return null;
 					}
-					//System.out.print("elevationArray[0].length: " + elevationArray[0].length);
-					//System.out.println("elevationArray.length: " + elevationArray.length);
 				} else {
 					String[] splitLine = sCurrentLine.split(" ");
 
@@ -85,19 +79,12 @@ public class Skiing {
 						elevationArray[numLine-1][i] = Integer.parseInt(splitLine[i]);
 					}
 				}
-				//System.out.println(sCurrentLine);
 				numLine++;
 			}
 			// If the number of rows is not the same height stated, it is not a valid input. (no. of rows = total lines - 1)
 			if (numLine-1 != elevationArray.length) {
 				System.out.println("Invalid number of rows");
 				return null;
-			}
-
-			for (int i = 0; i < elevationArray.length; i++) {
-				for (int j = 0; j < elevationArray[0].length; j++) {
-					//System.out.println("elevationArray["+i+"]["+j+"]: " + elevationArray[i][j]);
-				}
 			}
 			return elevationArray;
 		} catch (IOException e) {
@@ -120,35 +107,30 @@ public class Skiing {
 
 	private static String recursiveSeek(int[][] map, int i, int j, String path) {
 
-		//System.out.println("recursiveSeek i: "+i+"j: "+j);
 		if (path.length() > 0)
 			path += "->";
 		path += map[i][j];
 		String[] fourPaths = {"", "", "", ""};
 		// West
 		if (i-1 > 0) {
-			//System.out.println("i-1 > 0");
 			if (map[i-1][j] < map[i][j]) {
 				fourPaths[0] = recursiveSeek(map, i-1, j, path);
 			}
 		}
 		// North
 		if (j-1 > 0) {
-			//System.out.println("j-1 > 0");
 			if (map[i][j-1] < map[i][j]) {
 				fourPaths[1] = recursiveSeek(map, i, j-1, path);
 			}
 		}
 		// East
 		if (j+1 < map[i].length) {
-			//System.out.println("j+1 < map[i].length");
 			if (map[i][j+1] < map[i][j]) {
 				fourPaths[2] = recursiveSeek(map, i, j+1, path);
 			}
 		}
 		// South
 		if (i+1 < map.length) {
-			//System.out.println("i+1 < map[i].length");
 			if (map[i+1][j] < map[i][j]) {
 				fourPaths[3] = recursiveSeek(map, i+1, j, path);
 			}
@@ -156,7 +138,6 @@ public class Skiing {
 		String returnPath = path;
 		// Compare and return the longest and largest vertical drop path.
 		for (int k = 0; k < fourPaths.length; k++) {
-			//System.out.println("fourPaths["+k+"]:" + fourPaths[k].length());
 			// If returned path from this element is longer than
 			// the current stored path, save it as the lonest path.
 			if (fourPaths[k].length() > returnPath.length())
@@ -164,8 +145,6 @@ public class Skiing {
 			else if (fourPaths[k].length() == returnPath.length() && returnPath.length() > 1) {
 				// If the returned path from this element is the same length as
 				// the current stored path, save the one with the more vertical drop.
-				//System.out.println("fourPaths[k]: " + fourPaths[k] + " length: " + fourPaths[k].length());
-				//System.out.println("returnPath: " + returnPath);
 				int fourPathsDrop = Character.getNumericValue(fourPaths[k].charAt(0)) - Character.getNumericValue(fourPaths[k].charAt(fourPaths[k].length()-1));
 				int returnPathDrop = Character.getNumericValue(returnPath.charAt(0)) - Character.getNumericValue(returnPath.charAt(returnPath.length()-1));
 				if (fourPathsDrop > returnPathDrop) {
@@ -173,7 +152,6 @@ public class Skiing {
 				}
 			}
 		}
-		//System.out.println("Return path: " + returnPath);
 		return returnPath;
 	}
 }
