@@ -9,7 +9,7 @@ public class Skiing {
 
     public static void main(String[] args) {
 
-      // Obtain 2d array digital map 
+      // Obtain 2d array digital map
       int[][] map = getMap2dArray(FILENAME);
 
       // If input was valid
@@ -17,9 +17,11 @@ public class Skiing {
           String path = "";
           String longestPath = "";
           String currentPath = "";
+
+					// Loop through every single element and seek the longest path it can obtain
           for (int i = 0; i < map.length; i++) {
               for (int j = 0; j < map[0].length; j++) {
-                  // Loop through every single element and seek the path
+
                   currentPath = recursiveSeek(map, i, j, path);
 
                   // If returned path from this element is longer than
