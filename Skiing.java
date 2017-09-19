@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Skiing {
 
-  private static final String FILENAME = "Example_Input_2.txt";
+  private static final String FILENAME = "map.txt";
 
   public static void main(String[] args) {
 
@@ -32,15 +32,25 @@ public class Skiing {
           // If the returned path from this element is the same length as
           // the current stored path, save the one with the more vertical drop.
           else if (currentPath.length() == longestPath.length()) {
-            int currentPathDrop = Character.getNumericValue(currentPath.charAt(0)) - Character.getNumericValue(currentPath.charAt(currentPath.length()-1));
-            int longestPathDrop = Character.getNumericValue(longestPath.charAt(0)) - Character.getNumericValue(longestPath.charAt(longestPath.length()-1));
+
+						longestPath = compareDrop(currentPath, longestPath);
+						/*String[] currentPathChar = currentPath.split("->");
+						String[] longestPathChar = longestPath.split("->");
+						int currentPathDrop = Integer.parseInt(currentPathChar[0]) - Integer.parseInt(currentPathChar[currentPathChar.length-1]);
+						int longestPathDrop = Integer.parseInt(longestPathChar[0]) - Integer.parseInt(longestPathChar[longestPathChar.length-1]);
+
             if (currentPathDrop > longestPathDrop) {
                 longestPath = currentPath;
-            }
+            }*/
           }
         }
       }
-        System.out.println("Longest and largest vertical drop path: " + longestPath);
+			String[] longestPathChar = longestPath.split("->");
+			int longestPathDrop = Integer.parseInt(longestPathChar[0]) - Integer.parseInt(longestPathChar[longestPathChar.length-1]);
+      System.out.println("Longest and largest vertical drop path: " + longestPath);
+			System.out.println("Length: " + longestPathChar.length);
+			System.out.println("Drop: " + longestPathDrop);
+
     } else {
         System.out.println("Input out of range!");
     }
@@ -127,7 +137,7 @@ public class Skiing {
         fourPaths[1] = recursiveSeek(map, i, j-1, path);
     }
     // If east is viable
-    if (j+1 < map[i].length map[i][j+1] < map[i][j]) {
+    if (j+1 < map[i].length && map[i][j+1] < map[i][j]) {
         fourPaths[2] = recursiveSeek(map, i, j+1, path);
     }
     // If south is viable
@@ -146,14 +156,21 @@ public class Skiing {
 
         // If the returned path from this element is the same length as
         // the current stored path, save the one with the more vertical drop.
-        else if (fourPaths[k].length() == returnPath.length() && returnPath.length() > 1) {
-            int fourPathsDrop = Character.getNumericValue(fourPaths[k].charAt(0)) - Character.getNumericValue(fourPaths[k].charAt(fourPaths[k].length()-1));
-            int returnPathDrop = Character.getNumericValue(returnPath.charAt(0)) - Character.getNumericValue(returnPath.charAt(returnPath.length()-1));
-            if (fourPathsDrop > returnPathDrop) {
-                returnPath = fourPaths[k];
-            }
+        else if (fourPaths[k].length() == returnPath.length()) {
+					returnPath = compareDrop(returnPath, fourPaths[k]);
         }
     }
     return returnPath;
   }
+
+	private static String compareDrop(String firstPath, String secondPath) {
+		String[] firstPathChar = firstPath.split("->");
+		String[] secondPathChar = secondPath.split("->");
+		int firstPathDrop = Integer.parseInt(firstPathChar[0]) - Integer.parseInt(firstPathChar[firstPathChar.length-1]);
+		int secondPathDrop = Integer.parseInt(secondPathChar[0]) - Integer.parseInt(secondPathChar[secondPathChar.length-1]);
+			if (firstPathDrop > secondPathDrop)
+				return firstPath;
+			else
+				return secondPath;
+	}
 }
