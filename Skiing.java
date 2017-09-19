@@ -18,7 +18,7 @@ public class Skiing {
       String longestPath = "";
       String currentPath = "";
 
-			// Loop through every single element and seek the longest path it can obtain
+      // Loop through every single element and seek the longest path it can obtain
       for (int i = 0; i < map.length; i++) {
         for (int j = 0; j < map[0].length; j++) {
 
