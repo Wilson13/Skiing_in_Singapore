@@ -31,26 +31,15 @@ public class Skiing {
 
           // If the returned path from this element is the same length as
           // the current stored path, save the one with the more vertical drop.
-          else if (currentPath.length() == longestPath.length()) {
-
-						longestPath = compareDrop(currentPath, longestPath);
-						/*String[] currentPathChar = currentPath.split("->");
-						String[] longestPathChar = longestPath.split("->");
-						int currentPathDrop = Integer.parseInt(currentPathChar[0]) - Integer.parseInt(currentPathChar[currentPathChar.length-1]);
-						int longestPathDrop = Integer.parseInt(longestPathChar[0]) - Integer.parseInt(longestPathChar[longestPathChar.length-1]);
-
-            if (currentPathDrop > longestPathDrop) {
-                longestPath = currentPath;
-            }*/
-          }
+          else if (currentPath.length() == longestPath.length())
+            longestPath = compareDrop(currentPath, longestPath);
         }
       }
-			String[] longestPathChar = longestPath.split("->");
-			int longestPathDrop = Integer.parseInt(longestPathChar[0]) - Integer.parseInt(longestPathChar[longestPathChar.length-1]);
+      String[] longestPathChar = longestPath.split("->");
+      int longestPathDrop = Integer.parseInt(longestPathChar[0]) - Integer.parseInt(longestPathChar[longestPathChar.length-1]);
       System.out.println("Longest and largest vertical drop path: " + longestPath);
-			System.out.println("Length: " + longestPathChar.length);
-			System.out.println("Drop: " + longestPathDrop);
-
+      System.out.println("Length: " + longestPathChar.length);
+      System.out.println("Drop: " + longestPathDrop);
     } else {
         System.out.println("Input out of range!");
     }
@@ -157,20 +146,20 @@ public class Skiing {
         // If the returned path from this element is the same length as
         // the current stored path, save the one with the more vertical drop.
         else if (fourPaths[k].length() == returnPath.length()) {
-					returnPath = compareDrop(returnPath, fourPaths[k]);
+          returnPath = compareDrop(returnPath, fourPaths[k]);
         }
     }
     return returnPath;
   }
 
-	private static String compareDrop(String firstPath, String secondPath) {
-		String[] firstPathChar = firstPath.split("->");
-		String[] secondPathChar = secondPath.split("->");
-		int firstPathDrop = Integer.parseInt(firstPathChar[0]) - Integer.parseInt(firstPathChar[firstPathChar.length-1]);
-		int secondPathDrop = Integer.parseInt(secondPathChar[0]) - Integer.parseInt(secondPathChar[secondPathChar.length-1]);
-			if (firstPathDrop > secondPathDrop)
-				return firstPath;
-			else
-				return secondPath;
-	}
+  private static String compareDrop(String firstPath, String secondPath) {
+    String[] firstPathChar = firstPath.split("->");
+    String[] secondPathChar = secondPath.split("->");
+    int firstPathDrop = Integer.parseInt(firstPathChar[0]) - Integer.parseInt(firstPathChar[firstPathChar.length-1]);
+    int secondPathDrop = Integer.parseInt(secondPathChar[0]) - Integer.parseInt(secondPathChar[secondPathChar.length-1]);
+      if (firstPathDrop > secondPathDrop)
+        return firstPath;
+      else
+        return secondPath;
+  }
 }
