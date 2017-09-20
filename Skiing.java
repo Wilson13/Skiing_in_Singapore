@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Skiing {
 
-  private static final String FILENAME = "Example_Input_2.txt";
+  private static final String FILENAME = "map.txt";
 
   public static void main(String[] args) {
 
