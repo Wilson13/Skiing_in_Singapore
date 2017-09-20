@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Skiing {
 
-  private static final String FILENAME = "map.txt";
+  private static final String FILENAME = "Example_Input_2.txt";
 
   public static void main(String[] args) {
 
@@ -21,7 +21,6 @@ public class Skiing {
       // Loop through every single element and seek the longest path it can obtain
       for (int i = 0; i < map.length; i++) {
         for (int j = 0; j < map[0].length; j++) {
-
           currentPath = recursiveSeek(map, i, j, path);
 
           // If returned path from this element is longer than
@@ -82,7 +81,9 @@ public class Skiing {
               // Save elevation into 2-d array
               for (int i = 0; i < elevationArray[0].length; i++) {
                   elevationArray[numLine-1][i] = Integer.parseInt(splitLine[i]);
+									System.out.print(elevationArray[numLine-1][i] + " ");
               }
+							System.out.print("\n");
           }
           numLine++;
         }
@@ -116,22 +117,31 @@ public class Skiing {
     if (path.length() > 0)
         path += "->";
     path += map[i][j];
-
+		System.out.println("i: " + i + " j: " + j + " map[i][j]: " + map[i][j] + " path: " + path);
     // If west is viable
-    if (i-1 > 0 && map[i-1][j] < map[i][j]) {
-        fourPaths[0] = recursiveSeek(map, i-1, j, path);
+    if (j-1 >= 0 && map[i][j-1] < map[i][j]) {
+      System.out.println("west" + " i: " + i + " j: " + j + " map[i][j]: " + map[i][j] + "\n");
+      fourPaths[0] = recursiveSeek(map, i, j-1, path);
+			System.out.println("fourPaths[0]: " + fourPaths[0]);
     }
     // If north is viable
-      if (j-1 > 0 && map[i][j-1] < map[i][j]) {
-        fourPaths[1] = recursiveSeek(map, i, j-1, path);
+    if (i-1 >= 0 && map[i-1][j] < map[i][j]) {
+      System.out.println("north" + " i: " + i + " j: " + j + " map[i][j]: " + map[i][j] + "\n");
+      fourPaths[1] = recursiveSeek(map, i-1, j, path);
+			System.out.println("fourPaths[0]: " + fourPaths[1]);
     }
     // If east is viable
     if (j+1 < map[i].length && map[i][j+1] < map[i][j]) {
-        fourPaths[2] = recursiveSeek(map, i, j+1, path);
+      System.out.println("east" + " i: " + i + " j: " + j + " map[i][j]: " + map[i][j] + "\n");
+      fourPaths[2] = recursiveSeek(map, i, j+1, path);
+			System.out.println("fourPaths[0]: " + fourPaths[2]);
     }
     // If south is viable
     if (i+1 < map.length && map[i+1][j] < map[i][j]) {
+      System.out.println("south" + " i: " + i + " j: " + j + " map[i][j]: " + map[i][j] + " map[i+1][j]: " + map[i+1][j] + "\n");
+			//System.out.println("path: " + path + " i: " + i + " j: " + j + " map[i][j]: " + map[i][j]);
       fourPaths[3] = recursiveSeek(map, i+1, j, path);
+			System.out.println("fourPaths[0]: " + fourPaths[3]);
     }
     String returnPath = path;
 
