@@ -17,20 +17,23 @@ public class Skiing {
       String path = "";
       String longestPath = "";
       String currentPath = "";
-
+			int curLen = 0;
+			int longestLen = 0;
       // Loop through every single element and seek the longest path it can obtain
       for (int i = 0; i < map.length; i++) {
         for (int j = 0; j < map[0].length; j++) {
           currentPath = recursiveSeek(map, i, j, path);
 
+					curLen = currentPath.split("->").length;
+					longestLen = longestPath.split("->").length;
           // If returned path from this element is longer than
           // the current stored path, save it as the lonest path.
-          if (currentPath.length() > longestPath.length())
+          if (curLen > longestLen)
               longestPath = currentPath;
 
           // If the returned path from this element is the same length as
           // the current stored path, save the one with the more vertical drop.
-          else if (currentPath.length() == longestPath.length())
+          else if (curLen == longestLen && currentPath.length() > 0 && longestPath.length() > 0)
             longestPath = compareDrop(currentPath, longestPath);
         }
       }
@@ -133,23 +136,24 @@ public class Skiing {
     if (i+1 < map.length && map[i+1][j] < map[i][j]) {
       fourPaths[3] = recursiveSeek(map, i+1, j, path);
     }
-    String returnPath = path;
 
     // Compare and return the longest and largest vertical drop path.
     for (int k = 0; k < fourPaths.length; k++) {
 
+				int fourPathsLen = fourPaths[k].split("->").length;
+				int pathLen = path.split("->").length;
         // If returned path from this element is longer than
         // the current stored path, save it as the lonest path.
-        if (fourPaths[k].length() > returnPath.length())
-            returnPath = fourPaths[k];
+        if (fourPathsLen > pathLen)
+            path = fourPaths[k];
 
         // If the returned path from this element is the same length as
         // the current stored path, save the one with the more vertical drop.
-        else if (fourPaths[k].length() == returnPath.length()) {
-          returnPath = compareDrop(returnPath, fourPaths[k]);
+        else if (fourPathsLen == pathLen && fourPaths[k].length() > 0 && path.length() > 0) {
+          path = compareDrop(path, fourPaths[k]);
         }
     }
-    return returnPath;
+    return path;
   }
 
   private static String compareDrop(String firstPath, String secondPath) {
