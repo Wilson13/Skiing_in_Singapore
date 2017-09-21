@@ -17,15 +17,15 @@ public class Skiing {
       String path = "";
       String longestPath = "";
       String currentPath = "";
-			int curLen = 0;
-			int longestLen = 0;
+      int curLen = 0;
+      int longestLen = 0;
       // Loop through every single element and seek the longest path it can obtain
       for (int i = 0; i < map.length; i++) {
         for (int j = 0; j < map[0].length; j++) {
           currentPath = recursiveSeek(map, i, j, path);
 
-					curLen = currentPath.split("->").length;
-					longestLen = longestPath.split("->").length;
+          curLen = currentPath.split("->").length;
+          longestLen = longestPath.split("->").length;
           // If returned path from this element is longer than
           // the current stored path, save it as the lonest path.
           if (curLen > longestLen)
@@ -114,6 +114,7 @@ public class Skiing {
 
   private static String recursiveSeek(int[][] map, int i, int j, String path) {
 
+    // This recursiveSeek is a recursive DFS
     String[] fourPaths = {"", "", "", ""};
     if (path.length() > 0)
         path += "->";
@@ -140,8 +141,8 @@ public class Skiing {
     // Compare and return the longest and largest vertical drop path.
     for (int k = 0; k < fourPaths.length; k++) {
 
-				int fourPathsLen = fourPaths[k].split("->").length;
-				int pathLen = path.split("->").length;
+        int fourPathsLen = fourPaths[k].split("->").length;
+        int pathLen = path.split("->").length;
         // If returned path from this element is longer than
         // the current stored path, save it as the lonest path.
         if (fourPathsLen > pathLen)
